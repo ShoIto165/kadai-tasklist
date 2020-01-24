@@ -3,19 +3,16 @@
     <li class="media mb-3">
       <div class="media-body">
         <div>
-          <%= link_to task.id, task_path(task.id) %>
-        </div>
-        <div>
-          <p><%= task.status %></p>
-          <p><%= task.content %></p>
+          ・<%= link_to task.id, task_path(task.id) %> > <%= task.status %> ： <%= task.content %>
         </div>
         <div>
           <% if current_user == task.user %>
-            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            <%= link_to "タスクの削除", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
           <% end %>
         </div>
       </div>
     </li>
   <% end %>
+  <%= link_to 'タスク新規作成', new_task_path(@task), class: 'btn btn-primary btn-block' %>
   <%= paginate tasks %>
 </ul>

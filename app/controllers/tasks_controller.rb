@@ -3,11 +3,10 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:show, :update, :edit, :destroy]
   
   def index
-    if logged_in?
       @task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-    end
   end
+
 
   def show
     @task = Task.find(params[:id])
@@ -26,7 +25,7 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Task が作成されませんでした'
-      render 'tasks/index'
+      render :_form
     end
   end
 
